@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta charset="utf-8" />
+        <link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" />
+        <link href="styles/main.css" rel="stylesheet" />
+
+        <script src="cordova.js"></script>
+        <script src="kendo/js/jquery.min.js"></script>
+        <script src="kendo/js/kendo.mobile.min.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
+        <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha1.js"></script>
+
+        <script src="scripts/libs/rsvp.min.js"></script>
+        <script src="scripts/libs/scrollTo-min.js"></script>
+        <script src="scripts/http-request.js"></script>
+        <script src="scripts/login.js"></script>
+        <script src="scripts/profile-update.js"></script>
+        <script src="scripts/user-search.js"></script>
+        <script src="scripts/event-search.js"></script>
+        <script src="scripts/list-view.js"></script>
+        <script src="scripts/events.js"></script>
+        <script src="scripts/messages.js"></script>
+        <script src="scripts/location.js"></script>
+        <script src="scripts/app.js"></script>
+
+    </head>
+    <body>
+        <!--Home-->
+        <div id="home-view"
+             data-role="view"
+             data-title="Home">
+            <div class="view-content">
+                <div class="img"></div>
+                <h1>Welcome to the easy social life app!</h1>
+                <p>
+                    This is the home screen. You can start using the app by logging in or registering from the menu.
+                </p>
+            </div>
+        </div>
+
+        <!--Login-->
+        <div id="login-view"
+             data-role="view"
+             data-title="Login"
+             data-model="app.loginService.viewModel">
+            <div class="view-content">
+                <div class="logo"></div>
+                <h3 data-bind="invisible: isLoggedIn">Enter your credentials:</h3>
+                <h1 class="welcome" data-bind="visible: isLoggedIn">
+                    Welcome, <span data-bind="text: profile.displayName"></span>!
+                </h1>
+                <div class="buttonArea">
+                    <input type="submit" id="logout" data-role="button" data-bind="click: onLogout, visible: isLoggedIn" class="login-button" value="Logout" />
+                </div>
+
+                <form data-bind="events: { keyup: checkEnter }">
+                    <ul class="white-form" data-role="listview" data-style="inset" data-bind="invisible: isLoggedIn">
+                        <li>
+                            <label>
+                                Username
+                                <input type="text" data-bind="value: username" />
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                Password
+                                <input type="password" data-bind="value: password" />
+                            </label>
+                        </li>
+                    </ul>
+                    <ul class="white-form" data-role="listview" data-style="inset" data-bind="visible: isRegisterPressed">
+                        <li>
+                            <span>Please provide the following in order to register:</span>
+                        </li>
+                        <li>
+                            <label>
+                                Repeat password
+                                <input type="password" data-bind="value: passwordRepeat" />
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                Display Name
+                                <input type="text" data-bind="value: displayName" />
+                            </label>
+                        </li>
+                    </ul>
+
+                    <div class="buttonArea">
+                        <input type="submit" id="login" data-role="button" data-bind="click: onLogin, invisible: isLoggedIn" class="login-button" value="Login" />
+                        <input type="submit" id="register" data-role="button" data-bind="click: onRegister, invisible: isLoggedIn" class="register-button" value="Register" />
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+        <!--Layout-->
+        <div data-role="layout" data-id="default-layout">
+
+            <!--Header-->
+            <header data-role="header">
+                <div data-role="navbar">
+                    <a data-role="button" data-rel="drawer" href="#menu-drawer" data-icon="organize" data-align="left"></a>
+                    <span data-role="view-title"></span>
+                </div>
+            </header>
+        </div>
+
+        <div data-role="drawer" id="menu-drawer" style="width: 270px" class="menu">
+            <!--data-views="['/', 'drawer-home', 'drawer-starred', 'drawer-deleted', 'drawer-spam', 'drawer-drafts', 'drawer-sent', '/mobile/m/drawer/index.html']"-->
+            <ul data-role="listview" data-type="group">
+                <li id="first-drawer-item">Main menu
+                    <ul>
+                        <li data-icon="home">
+                            <a href="#login-view">Home</a>
+                        </li>
+                        <li data-icon="about">
+                            <a href="views/profile-view.html#profile-view" >Your Profile</a>
+                        </li>
+                        <li data-icon="history">
+                            <a href="views/update-profile-view.html#profile-update">Update profile</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>Friends
+                    <ul>
+                        <li data-icon="globe">
+                            <a href="views/search-users-view.html#users-view">Search users</a>
+                        </li>
+                        <li data-icon="contacts">
+                            <a href="views/lists-view.html#lists-view?type=1">Your friends</a>
+                        </li>
+                        <li data-icon="reply">
+                            <a href="views/free-friends-view.html#free-friends">Write to your friends</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>Events
+                    <ul>
+                        <li data-icon="toprated">
+                            <a href="views/lists-view.html#lists-view?type=0">My events</a>
+                        </li>
+                        <li data-icon="search">
+                            <a href="views/search-events-view.html#search-events-view">Search events</a>
+                        </li>
+                        <li data-icon="add">
+                            <a href="views/edit-event-view.html#event-edit">Create event</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </body>
+</html>

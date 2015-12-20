@@ -1,0 +1,45 @@
+<div id="lists-view"
+     data-role="view"
+     data-title="Lists"
+     data-model="app.listService.viewModel"
+     data-show="app.listService.viewModel.onLoad">
+    <div class="view-content">
+        <div class="list-view" data-bind="visible: isLoggedIn">
+            <ul data-role="listview"
+                data-style="inset" 
+                data-bind="source: friends, visible: areUsersFound"
+                data-template="user-list-template">
+            </ul>
+            <ul data-role="listview"
+                data-style="inset" 
+                data-bind="source: events, visible: areEventsFound"
+                data-template="event-list-template">
+            </ul>
+            <div data-bind="invisible: areAnyResults">
+                <h1>No events or users found.</h1>
+            </div>
+        </div>
+        <div class="logged-out" data-bind="invisible: isLoggedIn">
+            <h1 class="error" data-bind="invisible: isLoggedIn">
+                You are not logged in. Please log in to view users & events.
+            </h1>
+        </div>
+    </div>
+
+</div>
+
+<script type="text/x-kendo-tmpl" id="event-list-template">
+    <div data-bind="{events: {click: navigateToEvent}}">
+        <a>${Name}</a>
+    </div>
+</script>
+
+<script type="text/x-kendo-tmpl" id="user-list-template">
+    <div data-bind="{events: {click: navigateToUser}}">
+        <a>${DisplayName}</a>
+    </div>
+    <!--<li data-bind="{events: {click: navigateToUser}}">
+    <span>Display name: </span>
+    <span>#: DisplayName #</span>
+    </li>-->
+</script>

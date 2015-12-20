@@ -1,0 +1,49 @@
+<!-- User searcher -->
+<div id="users-view"
+     data-role="view"
+     data-title="Search users"
+     data-model="app.userService.viewModel"
+     data-show="app.userService.viewModel.onLoad">
+    <div class="view-content">
+        <div class="users-info" data-bind="visible: isLoggedIn">
+            <ul class="white-form" data-role="listview" data-style="inset">
+                <li>
+                    <label>
+                        Search for users
+                        <input type="search" data-bind="value: search" />
+                    </label>
+                </li>
+                <li>
+                    <div class="buttonArea">
+                        <input type="submit" class="update" 
+                               data-role="button" data-bind="click: onSearch" 
+                               class="update-button" value="Search" />
+                    </div>
+                </li>
+            </ul>
+            <div data-bind="visible: areUsersSearched">
+                <h1>Results:</h1>
+                <h1 data-bind="invisible: areUsersFound">No users found.</h1>
+                <ul data-role="listview"
+                    data-style="inset"
+                    class="results-list"
+                    data-bind="source: users, visible: areUsersFound"
+                    data-template="users-template">
+                </ul>
+            </div>
+        </div>
+        <div class="logged-out" data-bind="invisible: isLoggedIn">
+            <h1 class="error" data-bind="invisible: isLoggedIn">You are not logged in. Please log in to search.</h1>
+        </div>
+    </div>
+</div>
+
+<script type="text/x-kendo-tmpl" id="users-template">
+    <div data-bind="{events: {click: navigateToUser}}">
+        <a>${DisplayName}</a>
+    </div>
+    <!--<li data-bind="{events: {click: navigateToUser}}">
+    <span>Display name: </span>
+    <span>#: DisplayName #</span>
+    </li>-->
+</script>

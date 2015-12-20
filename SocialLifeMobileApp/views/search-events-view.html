@@ -1,0 +1,46 @@
+<!-- Search events -->
+<div id="search-events-view"
+     data-role="view"
+     data-title="Search events"
+     data-model="app.eventSearchService.viewModel"
+     data-show="app.eventSearchService.viewModel.onLoad">
+    <div class="view-content">
+        <div class="events-info" data-bind="visible: isLoggedIn">
+            <ul class="white-form" data-role="listview" data-style="inset">
+                <li>
+                    <label>
+                        Search for events
+                        <input type="search" data-bind="value: search" />
+                    </label>
+                </li>
+                <li>
+                    <div class="buttonArea">
+                        <input type="submit" class="update" 
+                               data-role="button" data-bind="click: onSearch" 
+                               class="update-button" value="Search" />
+                    </div>
+                </li>
+            </ul>
+            <div data-bind="visible: areEventsSearched">
+                <h1>Results:</h1>
+                <h1 data-bind="invisible: areEventsFound">No events found.</h1>
+                <ul data-role="listview"
+                    data-style="inset" 
+                    class="results-list"
+                    data-bind="source: events, visible: areEventsFound"
+                    data-template="event-results-template">
+                </ul>
+            </div>
+        </div>
+        <div class="logged-out" data-bind="invisible: isLoggedIn">
+            <h1 class="error" data-bind="invisible: isLoggedIn">You are not logged in. Please log in to search.</h1>
+        </div>
+    </div>
+</div>
+
+<script type="text/x-kendo-tmpl" id="event-results-template">
+    <!--<div data-bind="{events: {click: navigateToEvent}}">
+        <a>${Name}</a>
+    </div>-->
+    <div data-bind="{events: {click: navigateToEvent}}"><a>${Name}</a></div>
+</script>

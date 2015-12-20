@@ -1,0 +1,29 @@
+<!-- Free friends message sender -->
+<div id="free-friends"
+     data-role="view"
+     data-title="Message"
+     data-model="app.messagesService.viewModel"
+     data-show="app.messagesService.viewModel.onLoad">
+    <div class="view-content">
+        <div class="message-info"  data-bind="visible: isLoggedIn">
+            <ul id="friends-message-form" data-bind="events: { keyup: checkEnter }" 
+                class="white-form" data-role="listview" data-style="inset">
+                <li>
+                    <label id="friends-message-label">
+                        Write a message
+                    </label>
+                </li>
+                <li>
+                    <textarea id="friends-message" placeholder="Message for your friends who are free" 
+                              data-bind="value: messageToSend" rows="8"></textarea>
+                </li>
+            </ul>
+            <div class="buttonArea">
+                <input type="submit" class="update" data-role="button" data-bind="click: onSendFriendMessage" class="update-button" value="Send message" />
+            </div>
+        </div>
+        <div class="logged-out" data-bind="invisible: isLoggedIn">
+            <h1 class="error" data-bind="invisible: isLoggedIn">You are not logged in. Please log in to write messages.</h1>
+        </div>
+    </div>
+</div>

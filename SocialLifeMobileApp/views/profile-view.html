@@ -1,0 +1,124 @@
+<!-- Profile updater -->
+<div id="profile-view"
+     data-role="view"
+     data-title="Profile"
+     data-model="app.profileService.viewModel"
+     data-show="app.profileService.viewModel.onLoad">
+    <div class="view-content">
+        <div class="user-info"  data-bind="visible: isLoggedIn">
+            <div id="user-details" data-role="tabstrip">
+                <img id="avatar" data-bind=" attr: { src: avatar }" alt="Profile picture" />
+                <div>
+                    <h2 data-bind="text: displayName"></h2>
+                </div>
+            </div>
+            <div class="buttonArea" data-bind="visible: isOtherUser">
+                <input type="submit" data-role="button" data-bind="click: onAddAsFriend, invisible: isOtherUserFriend" 
+                       class="add-button" value="Add friend" />
+                <input type="submit" data-role="button" data-bind="click: onRemoveFriend, visible: isOtherUserFriend" 
+                       class="remove-button" value="Remove friend" />
+                <input type="submit" data-role="button" data-bind="click: onOpenMessages, visible: isOtherUserFriend" 
+                       class="message-button" value="Messages" />
+            </div>
+            <div>
+                <ul class="user-details" data-role="listview" data-style="inset" data-type="group">
+                    <li>
+                        Friends
+                        <ul>
+                            <li>
+                                <a data-bind="click: onSeeFriends">See friends</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li data-bind="visible: areEventsFound">
+                        Events
+                        <ul>
+                            <li>
+                                <a data-bind="click: onSeeEvents">See events</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li data-bind="visible: isLocationFound">
+                        Location
+                        <ul>
+                            <li>
+                                <a data-bind="click: onSeeLocation">See last location on <span data-bind="text: locationDate"></span></a>
+                            </li>
+                            <li data-bind="invisible: isOtherUser">
+                                <a data-bind="click: onShareLocation">Share your location</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        City
+                        <ul>
+                            <li>
+                                <span data-bind="text: city"></span>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        Country
+                        <ul>
+                            <li>
+                                <span data-bind="text: country"></span>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        Status
+                        <ul>
+                            <li>
+                                <span data-bind="text: status"></span>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        Birth date
+                        <ul>
+                            <li>
+                                <span data-bind="text: birthdate"></span>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        Phone number
+                        <ul>
+                            <li>
+                                <span data-bind="text: phone"></span>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        Gender
+                        <ul>
+                            <li>
+                                <span data-bind="text: gender"></span>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        Mood
+                        <ul>
+                            <li>
+                                <span data-bind="text: mood"></span>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        About
+                        <ul>
+                            <li>
+                                <span data-bind="text: about"></span>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="logged-out" data-bind="invisible: isLoggedIn">
+            <h1 class="error" data-bind="invisible: isLoggedIn">You are not logged in. Please log in to view profiles.</h1>
+        </div>
+    </div>
+</div>

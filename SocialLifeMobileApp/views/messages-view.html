@@ -1,0 +1,64 @@
+<!--Messages-->
+<div id="messages-view"
+     data-role="view"
+     data-title="Messages"
+     data-model="app.messagesService.viewModel"
+     data-show="app.messagesService.viewModel.onLoad">
+    <div class="messages" data-bind="visible: areMessagesReceived">
+        <div class="messages-title" data-bind="invisible: isEventMessages">
+            <span>With</span>
+            <span data-bind="text: otherUser"></span>
+        </div>
+        <div class="messages-title" data-bind="visible: isEventMessages">
+            <span>In</span>
+            <span data-bind="text: otherUser"></span>
+        </div>
+
+        <div class="separator">
+            <div class="dark"></div>
+            <div class="light"></div>
+        </div>
+
+        <ul class="forecast-list"
+            data-role="listview"
+            data-bind="source: messages"
+            data-template="messages-template">
+        </ul>
+        <div class="message-div" id="messages">
+            <input id="message-input" type="search" data-bind="value: messageToSend" />
+            <input type="submit" data-role="button" data-bind="click: onSendMessage" 
+                   class="message-button" value="Send" />
+        </div>
+    </div>
+    <div class="messages" data-bind="invisible: areMessagesReceived">
+        <div class="single-message">
+            <div class="message-content">
+                <span class="message-text">Nothing seems to be here. Why don't you write a message?</span>
+            </div>
+        </div>
+        <div class="message-div">
+            <input id="message-input" type="search" data-bind="value: messageToSend" />
+            <input type="submit" data-role="button" data-bind="click: onSendMessage" 
+                   class="message-button" value="Send" />
+        </div>
+    </div>
+    <div class="logged-out" data-bind="invisible: isLoggedIn">
+        <h1 class="error" data-bind="invisible: isLoggedIn">You are not logged in. Please log in to view messages.</h1>
+    </div>
+</div>
+
+<!--Weather forecast template-->
+<script type="text/x-kendo-tmpl" id="messages-template">
+    <div class="single-message">
+        <div class="message-content">
+            <span class="message-text">${Content}</span>
+        </div>
+        <div class="message-info">
+            <span class="message-sender">Written by <span style="font-weight: bold">${Sender}</span></span>
+            <span class="message-date">on ${DateString}</span>
+        </div>
+        <div>
+            <span class="message-status">${Status}</span>
+        </div>
+    </div>
+</script>

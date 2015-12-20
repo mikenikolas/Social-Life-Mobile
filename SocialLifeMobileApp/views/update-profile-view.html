@@ -1,0 +1,121 @@
+<!-- Profile updater -->
+<div id="profile-update"
+     data-role="view"
+     data-title="Profile"
+     data-model="app.profileService.viewModel"
+     data-show="app.profileService.viewModel.onLoad">
+    <div class="view-content">
+        <div class="buttonArea">
+            <input type="submit" data-role="button" data-bind="click: onUpdate, visible: isLoggedIn" 
+                   class="update-button" value="Update Profile" />
+        </div>
+        <!-- ADD AVATAR CSS -->
+        <div class="user-info"  data-bind="visible: isLoggedIn">
+            <div class="avatar" data-role="tabstrip">
+                <img id="avatar" data-bind="click: takePicture, attr: { src: avatar }" alt="Profile picture" />
+                <div>
+                    <input type="submit" class="camera" 
+                           data-role="button" data-bind="click: takePicture" 
+                           value="Camera" />
+                    <input type="submit" class="camera" 
+                           data-role="button" data-bind="click: choosePicture" 
+                           value="Gallery" />
+                </div>
+            </div>
+            <br />
+            <form id="update-form" data-bind="events: { keyup: checkEnter }">
+                <ul data-role="listview" data-style="inset">
+                    <li>
+                        <label>
+                            Display Name
+                            <input type="text" data-bind="value: displayName" />
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            City
+                            <input type="text" data-bind="value: city" />
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            Country
+                            <input type="text" data-bind="value: country" />
+                        </label>
+                    </li>
+                    <li>
+                        Status
+                        <ul data-role="listview" data-style="inset">
+                            <li>
+                                <label>
+                                    <input name="status-radio" value="Free" type="radio" />
+                                    Free
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input name="status-radio" value="Busy" type="radio" />
+                                    Busy
+                                </label>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <label>
+                            Birth date
+                            <input id="update-birth" type="date" data-bind="value: birthdate" />
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            Phone number
+                            <input type="tel" data-bind="value: phone" />
+                        </label>
+                    </li>
+                    <li>
+                        Gender
+                        <ul data-role="listview" data-style="inset">
+                            <li>
+                                <label>
+                                    <input name="gender-radio" value="Male" type="radio" />
+                                    Male
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input name="gender-radio" value="Female" type="radio" />
+                                    Female
+                                </label>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <label>
+                            Mood
+                            <input type="text" data-bind="value: mood" />
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            About
+                            <input type="text" data-bind="value: about" />
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            Password
+                            <input type="password" data-bind="value: password" />
+                        </label>
+                    </li>
+                </ul>
+
+                <div class="buttonArea">
+                    <input type="submit" data-role="button" data-bind="click: onUpdate" class="update-button" value="Update Profile" />
+                </div>
+            </form>
+        </div>
+        <div class="logged-out" data-bind="invisible: isLoggedIn">
+            <h1 class="error" data-bind="invisible: isLoggedIn">You are not logged in. Please log in to update your profile.</h1>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,104 @@
+<!-- Profile updater -->
+<div id="event-view"
+     data-role="view"
+     data-title="Event"
+     data-layout="new-layout"
+     data-model="app.eventService.viewModel"
+     data-show="app.eventService.viewModel.onLoad">
+    <div class="view-content">
+        <div class="event-info"  data-bind="visible: isLoggedIn">
+            <div id="user-details" data-role="tabstrip">
+                <img id="avatar" data-bind=" attr: { src: avatar }" alt="Profile picture" />
+                <div>
+                    <h2 data-bind="text: eventName"></h2>
+                </div>
+            </div>
+            <div class="buttonArea">
+                <input type="submit" data-role="button" data-bind="click: onAttendButton, invisible: isAttending" 
+                       class="add-button" value="Attend" />
+                <input type="submit" data-role="button" data-bind="click: onNotAttendButton, visible: isAttending" 
+                       class="remove-button" value="Not attending" />
+            </div>
+            <div>
+                <ul data-role="listview" data-style="inset" data-type="group">
+                    <li>
+                        Details
+                        <ul>
+                            <li>
+                                <span data-bind="text: content"></span>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        Location
+                        <ul>
+                            <li>
+                                <a data-bind="click: onSeeLocation">See location</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        Attendees
+                        <ul>
+                            <li>
+                                <a data-bind="click: onSeeUsers">See users</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        Creator
+                        <ul>
+                            <li>
+                                <a data-bind="click: navigateToUser, text: creator"></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        Event messages
+                        <ul>
+                            <li>
+                                <a data-bind="click: onSeeMessages">See messages</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        Date
+                        <ul>
+                            <li>
+                                <span data-bind="text: date"></span>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        Status
+                        <ul>
+                            <li>
+                                <span data-bind="text: status"></span>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="logged-out" data-bind="invisible: isLoggedIn">
+            <h1 class="error" data-bind="invisible: isLoggedIn">You are not logged in. Please log in to view events.</h1>
+        </div>
+    </div>
+</div>
+
+<div data-role="layout" data-id="new-layout">
+    <!--Header-->
+    <header data-role="header">
+        <div data-role="navbar">
+            <a data-role="button" data-rel="drawer" href="#menu-drawer" data-icon="organize" data-align="left"></a>
+            <span data-role="view-title"></span>
+            <a data-role="button" class="right-navbar" 
+               id="update-event-btn" data-align="right" 
+               data-bind="events:{ click: onUpdateEvent }">Update</a>
+        </div>
+    </header>
+</div>
+
+<script>
+    kendo.bind($("#update-event-btn"), app.eventService.viewModel);
+</script>

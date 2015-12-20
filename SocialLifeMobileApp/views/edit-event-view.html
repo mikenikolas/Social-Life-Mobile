@@ -1,0 +1,72 @@
+<!-- Event creator and updater -->
+<div id="event-edit"
+     data-role="view"
+     data-title="Edit event"
+     data-model="app.eventService.viewModel"
+     data-show="app.eventService.viewModel.onLoad">
+    <div class="view-content">
+        <div class="event-info" data-bind="visible: isLoggedIn">
+            <div class="avatar" data-role="tabstrip">
+                <img id="avatar" data-bind="click: takePicture, attr: { src: avatar }" alt="Profile picture" />
+                <div>
+                    <input type="submit" class="camera-button" 
+                           data-role="button" data-bind="click: takePicture" 
+                           value="Camera" />
+                    <input type="submit" class="camera-button" 
+                           data-role="button" data-bind="click: choosePicture" 
+                           value="Gallery" />
+                </div>
+            </div>
+            <form id="event-form" data-bind="events: { keyup: checkEnter }">
+                <ul data-role="listview" data-style="inset" class="edit-event">
+                    <li>
+                        <label>
+                            Name
+                            <input type="text" data-bind="value: eventName" />
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            Details
+                            <input type="text" data-bind="value: content" />
+                        </label>
+                    </li>
+                    <li>
+                        <a data-bind="click: onChooseLocation">Choose location</a>
+                    </li>
+                    <li>
+                        Status
+                        <ul data-role="listview" data-style="inset">
+                            <li>
+                                <label>
+                                    <input name="status-radio" value="Public" type="radio" checked="checked" />
+                                    Public
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input name="status-radio" value="Private" type="radio" />
+                                    Private
+                                </label>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <label>
+                            Date
+                            <input id="update-date" type="date" data-bind="value: date" />
+                        </label>
+                    </li>
+                </ul>
+
+                <div class="buttonArea">
+                    <input type="submit" data-role="button" data-bind="click: onSubmitEventData, invisible: isEventFound" class="update-button" value="Create event" />
+                    <input type="submit" data-role="button" data-bind="click: onSubmitEventData, visible: isEventFound" class="update-button" value="Update event" />
+                </div>
+            </form>
+        </div>
+        <div class="logged-out" data-bind="invisible: isLoggedIn">
+            <h1 class="error" data-bind="invisible: isLoggedIn">You are not logged in. Please log in to create or update events.</h1>
+        </div>
+    </div>
+</div>
